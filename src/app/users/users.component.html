@@ -1,0 +1,132 @@
+<div class="container">
+    <h2 class="display-5 text-center">User Company Details</h2>
+    <div class="text-right">
+        <h3><button (click)="add()" type="button" class="btn btn-sm btn-outline-secondary">Add New User</button></h3>
+    </div>
+    <!-- <div class="text-center">
+        <h2>User Company Information</h2>
+    </div> -->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Compnay Name</th>
+            <th>Address</th>
+            <th>Action</th>
+        </tr>
+        <tr *ngFor="let dat of users | async">
+            <td>{{ dat.data.username }}</td>
+            <td>{{ dat.data.company }}</td>
+            <td>{{ dat.data.location }}</td>
+            <td>
+                <!-- <button (click)="add()" type="button" class="btn btn-sm btn-outline-secondary">Add</button> &nbsp; -->
+                <button (click)="update(dat.id)" type="button" class="btn btn-sm btn-outline-secondary">Update</button> &nbsp;
+                <button (click)="deleteDoc(dat.id)" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+</div>
+
+<!-- <div *ngIf="!isUser" class="text-center">
+<h1 class="display-5"> User is longer logged In</h1>
+<button class="display-5 btn btn-outline-secondary" (click)="goBack()"> Click Here to Login In</button>
+</div> -->
+
+
+
+<!-- 
+<ul *ngFor="let post of users | async">
+        <li>
+          <strong>{{ post.data.username}}</strong>
+          <br>
+          {{post.data.company}}
+          <br>
+          {{post.data.location}}
+        </li>
+      </ul> -->
+<div class="container" *ngIf="createNewData">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Add New User</h2>
+            <form [formGroup]="register" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Name {{name}}</label>
+                    <input type="text" formControlName="name" [(ngModel)]="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                    />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Company {{company}}</label>
+                    <input type="text" formControlName="company" [(ngModel)]="company" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.company.errors }"
+                    />
+                    <div *ngIf="submitted && f.company.errors" class="invalid-feedback">
+                        <div *ngIf="f.company.errors.required">Company is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Address {{address}}</label>
+                    <input type="text" formControlName="address" [(ngModel)]="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+                    />
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">Address is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button class="btn btn-primary">Add New User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="view">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Update User</h2>
+            <form [formGroup]="updater" (ngSubmit)="onUpdate()">
+                <div class="form-group">
+                    <label>Name {{name}}</label>
+                    <input type="text" formControlName="namer" [(ngModel)]="namer" class="form-control" [ngClass]="{ 'is-invalid': submitted && g.namer.errors }"
+                    />
+                    <div *ngIf="submitted && g.namer.errors" class="invalid-feedback">
+                        <div *ngIf="g.namer.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Company {{company}}</label>
+                    <input type="text" formControlName="companyr" [(ngModel)]="companyr" class="form-control" [ngClass]="{ 'is-invalid': submitted && g.companyr.errors }"
+                    />
+                    <div *ngIf="submitted && g.companyr.errors" class="invalid-feedback">
+                        <div *ngIf="g.companyr.errors.required">Company is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Address {{address}}</label>
+                    <input type="text" formControlName="addressr" [(ngModel)]="addressr" class="form-control" [ngClass]="{ 'is-invalid': submitted && g.addressr.errors }"
+                    />
+                    <div *ngIf="submitted && g.addressr.errors" class="invalid-feedback">
+                        <div *ngIf="g.addressr.errors.required">Address is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button class="btn btn-primary">Update User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-outline-secondary" (click)="goBack()"> back </button>&nbsp;
+        <button type="button" class="btn btn-outline-success" (click)="logOut()"> Log Out </button>
+    </div>
+</div>
