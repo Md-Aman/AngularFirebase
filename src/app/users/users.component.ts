@@ -53,35 +53,37 @@ export class UsersComponent implements OnInit {
     // console.log("this.postsCol :", this.postsCol);
     // this.users = this.postsCol.valueChanges();
 
-    // var user = firebase.auth().currentUser;
+    var user = firebase.auth().currentUser;
 
-
-    this.users = this.postsCol.snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as User;
-          const id = a.payload.doc.id;
-          return { id, data };
+    if (user == null) {
+      this.router.navigate(['']);
+    } else {
+      this.users = this.postsCol.snapshotChanges()
+        .map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data() as User;
+            const id = a.payload.doc.id;
+            return { id, data };
+          });
         });
+
+      this.register = this.formBuilder.group({
+        name: ['', [Validators.required]],
+        company: ['', [Validators.required]],
+        address: ['', [Validators.required]],
       });
 
-    this.register = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      company: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-    });
-
-    this.updater = this.formBuilder.group({
-      namer: ['', [Validators.required]],
-      companyr: ['', [Validators.required]],
-      addressr: ['', [Validators.required]],
-    });
-    // if(user != null){
-    //    this.isUser = true;
-    // } else {
-    //   this.isUser = false;
-    // }
-
+      this.updater = this.formBuilder.group({
+        namer: ['', [Validators.required]],
+        companyr: ['', [Validators.required]],
+        addressr: ['', [Validators.required]],
+      });
+      // if(user != null){
+      //    this.isUser = true;
+      // } else {
+      //   this.isUser = false;
+      // }
+    }
   }
 
   name: string;
