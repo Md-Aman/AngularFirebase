@@ -28,7 +28,10 @@ export class LoginComponent implements OnInit {
         var errorCode = error.code;
         var errorMessage = error.message;
       });
-      var user = firebase.auth().currentUser;
+      var user = firebase.auth().currentUser.uid;
+      localStorage.setItem('userId', user);
+      console.log("localStorage.setItem('userId', user); ", localStorage.getItem('userId'))
+      console.log("user.uid, ;", user);
       if (user != null) {
         this.router.navigate(['users']);
       }
