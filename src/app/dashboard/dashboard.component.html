@@ -4,19 +4,34 @@
     <br>
     <small>{{user_name}}</small>
   </h2>
-  <br>
-  <br>
-  <ul class="list-inline text-center">
-    <li class="list-inline-item user-name btn btn-outline-info text-center" (click)="getUser(user.user_id)" *ngFor="let user of user_data | async;">{{ user.name }}</li>
-  </ul>
-  <br>
-</div>
 
-<br>
-<div class="row">
-  <div class="col-md-12 text-center">
-    <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
-    <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
-    <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button>
+  <br>
+  <div class="panel panel-default">
+    <table>
+      <tr>
+        <th class="text-center">Total Expenditure of December</th>
+        <th class="text-center">{{total_price}}</th>
+      </tr>
+      <tr>
+        <th class="text-center">Average Expenditure of December</th>
+        <th class="text-center">{{total_price/7}}</th>
+      </tr>
+
+    </table>
+
+    <br>
+    <br>
+    <ul class="list-inline text-center">
+      <li class="list-inline-item user-name btn btn-outline-info text-center" (click)="getUser(user.user_id)" *ngFor="let user of user_data | async;">{{ user.name }}</li>
+    </ul>
+    <br>
   </div>
-</div>
+
+  <br>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
+      <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
+      <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button>
+    </div>
+  </div>
