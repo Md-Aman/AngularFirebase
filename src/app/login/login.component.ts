@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
         var errorMessage = error.message;
       });
       var user = firebase.auth().currentUser.uid;
+      var user_email = firebase.auth().currentUser.email;
       localStorage.setItem('userId', user);
-      console.log("localStorage.setItem('userId', user); ", localStorage.getItem('userId'))
-      console.log("user.uid, ;", user);
+      localStorage.setItem('userEmail', user_email);
       if (user != null) {
         this.router.navigate(['users']);
       }
@@ -40,6 +40,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('userId') != null){
+      console.log("szf", localStorage.getItem('userId'));
+      this.router.navigate(['items']);
+    }
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]

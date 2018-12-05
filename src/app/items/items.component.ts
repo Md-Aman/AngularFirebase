@@ -15,23 +15,29 @@ interface Item {
   item_price: string;
   date_time: string;
 }
-
+interface User{
+  user_id:string;
+  name:string;
+}
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'items',
+  templateUrl: './items.component.html',
+  styleUrls: ['./items.component.css']
 })
+export class ItemsComponent implements OnInit {
 
-export class UsersComponent implements OnInit {
   @ViewChild("desciption") desp : ElementRef
   @ViewChild("price") pr : ElementRef
 
   items: any;
+  userName:any;
   // datas: AngularFireList<any[]>;
   data: any[];
   postsCol: AngularFirestoreCollection<Item>;
   postsDoc: AngularFirestoreDocument<Item>;
   usersUpdate: Observable<Item>;
+
+  users: AngularFirestoreCollection<User>;
 
   view: boolean = false;
   updateDa: any;
@@ -47,7 +53,8 @@ export class UsersComponent implements OnInit {
 
   item_description: string;
   item_price: number;
-
+  today = new Date();
+  date_time = '';
   logOut() {
     firebase.auth().signOut();
     localStorage.clear();
@@ -56,15 +63,20 @@ export class UsersComponent implements OnInit {
   // isUser: boolean;
   total_price: number = 0;
   user_email:string;
+  userData:any;
   ngOnInit() {
     
     if (localStorage.getItem('userId') == null) {
       this.router.navigate(['']);
-    } else {
-      this.user_email = localStorage.getItem('userEmail');
-    }
+    } 
+
+    this.users = this.afs.collection('users',ref => ref.where('user_id', '==', localStorage.getItem('userId')));
+    this.userName = this.users.valueChanges().subscribe(users =>{
+       this.userData = users;
+       localStorage.setItem('userName', this.userData[0].name);
+    })
+
     this.postsCol = this.afs.collection('items', ref => ref.where('user_id', '==', localStorage.getItem('userId')));
-    // console.log("this.postsCol :", this.postsCol);
     this.items = this.postsCol.valueChanges();
     this.items.subscribe(items => {
       for (let item of items) {
@@ -105,8 +117,7 @@ export class UsersComponent implements OnInit {
     // }
     // }
   }
-  today = new Date();
-  date_time = '';
+
 
 
 
@@ -138,7 +149,7 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   myHistory(){
-    this.router.navigate(['users']);
+    this.router.navigate(['items']);
   }
   deleteDoc(id) {
     this.afs.collection('users').doc(id).delete();
@@ -174,4 +185,5 @@ export class UsersComponent implements OnInit {
   //   }
 
   // }
+
 }

@@ -12,6 +12,8 @@ import { UsersComponent } from './users/users.component';
 import * as firebase from 'firebase';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ItemsComponent } from './items/items.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routers: Routes = [
@@ -19,7 +21,10 @@ const routers: Routes = [
     path:"", component:LoginComponent
   },
   {
-    path:"users", component:UsersComponent
+    path:"items", component:ItemsComponent
+  },
+  {
+    path:"dashboard", component:DashboardComponent
   }
 ]
 firebase.initializeApp(environment.firebase)
@@ -27,7 +32,9 @@ firebase.initializeApp(environment.firebase)
   declarations: [
     AppComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
+    ItemsComponent,
+    DashboardComponent
   ],
   imports: [
     FormsModule,
