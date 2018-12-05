@@ -39,9 +39,9 @@
         </tr>
         <tr *ngFor="let item of items | async; let i = index">
             <td>{{i+1}}</td>
-            <td>{{ item.data.date_time }}</td>
-            <td>{{ item.data.item_description }}</td>
-            <td>{{ item.data.price }}</td>
+            <td>{{ item.date_time }}</td>
+            <td>{{ item.item_description }}</td>
+            <td>{{ item.price }}</td>
             <!-- <td> -->
                 <!-- <button (click)="add()" type="button" class="btn btn-sm btn-outline-secondary">Add</button> &nbsp; -->
                 <!-- <button (click)="update(dat.id)" type="button" class="btn btn-sm btn-outline-secondary">Update</button> &nbsp;
@@ -50,7 +50,7 @@
         </tr>
         <tr>
                 <th class="text-center" colspan="3">Total</th>
-                <th>Price</th>
+                <th>{{total}}</th>
             </tr>
 
     </table>
