@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userId', user);
       localStorage.setItem('userEmail', user_email);
       if (user != null) {
-        this.router.navigate(['users']);
+        this.router.navigate(['items']);
       }
     }
 

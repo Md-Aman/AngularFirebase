@@ -15,6 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { ItemsComponent } from './items/items.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+// services
+import { ItemService } from './services/item-service/item.service';
+import { IndividualItemHistoryComponent } from './individual-item-history/individual-item-history.component'
+
 
 const routers: Routes = [
   {
@@ -25,6 +29,9 @@ const routers: Routes = [
   },
   {
     path:"dashboard", component:DashboardComponent
+  },
+  {
+    path:"user-item-histroy", component:IndividualItemHistoryComponent
   }
 ]
 firebase.initializeApp(environment.firebase)
@@ -34,7 +41,8 @@ firebase.initializeApp(environment.firebase)
     LoginComponent,
     UsersComponent,
     ItemsComponent,
-    DashboardComponent
+    DashboardComponent,
+    IndividualItemHistoryComponent
   ],
   imports: [
     FormsModule,
@@ -46,7 +54,7 @@ firebase.initializeApp(environment.firebase)
 
 
   ],
-  providers: [],
+  providers: [ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

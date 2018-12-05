@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
+import { ItemService } from './../services/item-service/item.service';
 interface User {
   user_id: string;
   name: string;
@@ -14,9 +15,8 @@ export class DashboardComponent implements OnInit {
   users: AngularFirestoreCollection<User>;
   user_data:any;
   user_name:string;
-  constructor(public afs: AngularFirestore, public router: Router) { 
+  constructor(public afs: AngularFirestore, public router: Router, public itemService:ItemService) { 
   this.user_name = localStorage.getItem("userName");
-  console.log("this.user_name :", this.user_name);
   }
 
   ngOnInit() {
@@ -26,7 +26,14 @@ export class DashboardComponent implements OnInit {
     this.users = this.afs.collection('users');
     this.user_data = this.users.valueChanges();
   }
+  dashboard(){
+    this.router.navigate(['dashboard']);
+  }
+  myHistory(){
+    this.router.navigate(['items']);
+  }
   getUser(userId){
-   console.log("userId :", userId);
+   this.itemService.user_id_for_individual_user_history = userId;
+   this.router.navigate(['user-item-histroy']);
   }
 }
