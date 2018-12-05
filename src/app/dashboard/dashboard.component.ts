@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { ItemService } from './../services/item-service/item.service';
+import * as firebase from 'firebase';
 interface User {
   user_id: string;
   name: string;
@@ -56,6 +57,12 @@ export class DashboardComponent implements OnInit {
   myHistory(){
     this.router.navigate(['items']);
   }
+  logOut() {
+    firebase.auth().signOut();
+    localStorage.clear();
+    this.router.navigate(['']);
+  }
+
   getUser(userId){
    this.itemService.user_id_for_individual_user_history = userId;
    this.router.navigate(['user-item-histroy']);
