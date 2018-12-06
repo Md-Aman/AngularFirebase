@@ -33,8 +33,6 @@ export class IndividualItemHistoryComponent implements OnInit {
    }
 
   ngOnInit() {
-   
-
     if(this.itemService.user_id_for_individual_user_history == undefined){
         this.router.navigate(['dashboard']);
     }else{
@@ -42,12 +40,10 @@ export class IndividualItemHistoryComponent implements OnInit {
       this.userName = this.users.valueChanges().subscribe(users =>{
          this.userData = users;
       })
-    console.log("item is :", this.itemService.user_id_for_individual_user_history);
 
     this.postsCol = this.afs.collection('items', ref => ref.where('user_id', '==', this.itemService.user_id_for_individual_user_history));
     this.items = this.postsCol.valueChanges();
     this.items.subscribe(items => {
-      console.log("items :", items);
       for (let item of items) {
         this.total_price += item.price;
       }

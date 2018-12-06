@@ -15,9 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { ItemsComponent } from './items/items.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+// Material
+import {MatExpansionModule} from '@angular/material/expansion';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+
 // services
 import { ItemService } from './services/item-service/item.service';
-import { IndividualItemHistoryComponent } from './individual-item-history/individual-item-history.component'
+import { IndividualItemHistoryComponent } from './individual-item-history/individual-item-history.component';
+import { ChangePasswordComponent } from './change-password/change-password.component'
 
 
 const routers: Routes = [
@@ -42,7 +48,11 @@ firebase.initializeApp(environment.firebase)
     UsersComponent,
     ItemsComponent,
     DashboardComponent,
-    IndividualItemHistoryComponent
+    IndividualItemHistoryComponent,
+    ChangePasswordComponent
+  ],
+  entryComponents: [
+    ChangePasswordComponent
   ],
   imports: [
     FormsModule,
@@ -51,6 +61,9 @@ firebase.initializeApp(environment.firebase)
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot(routers),
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatDialogModule
 
 
   ],

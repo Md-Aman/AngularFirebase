@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 
 import { formatDate } from '@angular/common';
+import { MatDialog, MatDialogRef } from "@angular/material";
+import { ChangePasswordComponent } from "./../change-password/change-password.component";
 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,9 +17,9 @@ interface Item {
   item_price: string;
   date_time: string;
 }
-interface User{
-  user_id:string;
-  name:string;
+interface User {
+  user_id: string;
+  name: string;
 }
 @Component({
   selector: 'items',
@@ -26,11 +28,11 @@ interface User{
 })
 export class ItemsComponent implements OnInit {
 
-  @ViewChild("desciption") desp : ElementRef
-  @ViewChild("price") pr : ElementRef
+  @ViewChild("desciption") desp: ElementRef
+  @ViewChild("price") pr: ElementRef
 
   items: any;
-  userName:any;
+  userName: any;
   // datas: AngularFireList<any[]>;
   data: any[];
   postsCol: AngularFirestoreCollection<Item>;
@@ -47,7 +49,11 @@ export class ItemsComponent implements OnInit {
   // updater: FormGroup;
 
   submitted = false;
-  constructor(public afs: AngularFirestore, public router: Router, private formBuilder: FormBuilder) {
+  constructor(
+    public afs: AngularFirestore,
+    public router: Router,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog) {
   }
 
 
@@ -62,18 +68,21 @@ export class ItemsComponent implements OnInit {
   }
   // isUser: boolean;
   total_price: number = 0;
-  user_email:string;
-  userData:any;
+  user_email: string;
+  userData: any;
+
   ngOnInit() {
-    
+
+    // setTimeout(() => this.dialog.open(ChangePasswordComponent,{ disableClose: true }))
+   
     if (localStorage.getItem('userId') == null) {
       this.router.navigate(['']);
-    } 
+    }
 
-    this.users = this.afs.collection('users',ref => ref.where('user_id', '==', localStorage.getItem('userId')));
-    this.userName = this.users.valueChanges().subscribe(users =>{
-       this.userData = users;
-       localStorage.setItem('userName', this.userData[0].name);
+    this.users = this.afs.collection('users', ref => ref.where('user_id', '==', localStorage.getItem('userId')));
+    this.userName = this.users.valueChanges().subscribe(users => {
+      this.userData = users;
+      localStorage.setItem('userName', this.userData[0].name);
     })
 
     this.postsCol = this.afs.collection('items', ref => ref.where('user_id', '==', localStorage.getItem('userId')));
@@ -145,10 +154,10 @@ export class ItemsComponent implements OnInit {
     this.desp.nativeElement.value = "";
     this.pr.nativeElement.value = "";
   }
-  dashboard(){
+  dashboard() {
     this.router.navigate(['dashboard']);
   }
-  myHistory(){
+  myHistory() {
     this.router.navigate(['items']);
   }
   deleteDoc(id) {

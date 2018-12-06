@@ -23,38 +23,59 @@ export class DashboardComponent implements OnInit {
   users: AngularFirestoreCollection<User>;
   postsCol: AngularFirestoreCollection<Item>;
   items: any;
-  userName:any;
+  userName: any;
   // datas: AngularFireList<any[]>;
   data: any[];
 
 
-  user_data:any;
-  user_name:string;
-  constructor(public afs: AngularFirestore, public router: Router, public itemService:ItemService) { 
-  this.user_name = localStorage.getItem("userName");
+  user_data: any;
+  user_name: string;
+  constructor(public afs: AngularFirestore, public router: Router, public itemService: ItemService) {
+    this.user_name = localStorage.getItem("userName");
   }
 
-  total_price:number = 0;
+  total_price: number = 0;
+  user_info: any;
+  item_info: any;
+  user_individual_details = [];
+  total: number = 0;
+  id :string;
+  name: string;
   ngOnInit() {
     if (localStorage.getItem('userId') == null) {
       this.router.navigate(['']);
     }
     this.users = this.afs.collection('users');
     this.user_data = this.users.valueChanges();
+    this.user_data.subscribe(userInfo => {
+      this.user_info = userInfo;
+    })
 
     this.postsCol = this.afs.collection('items');
     this.items = this.postsCol.valueChanges();
     this.items.subscribe(items => {
-      console.log("items :", items);
+      this.item_info = items;
       for (let item of items) {
         this.total_price += item.price;
       }
+      // for (let i = 0; i < this.user_info.length; i++) {
+      //   for (let j = 0; j < this.item_info.length; j++) {
+      //     if (this.user_info[i].user_id==this.item_info[j].user_id) {
+
+      //       this.total += this.item_info[j].price;
+      //       this.id = this.user_info[i].user_id;
+      //       this.name = this.user_info[i].name
+            
+      //     }
+      //   }
+      //   this.user_individual_details.push({ 'user_id': this.id, 'user_name': this.name, 'user_total': this.total })
+      // }
     });
   }
-  dashboard(){
+  dashboard() {
     this.router.navigate(['dashboard']);
   }
-  myHistory(){
+  myHistory() {
     this.router.navigate(['items']);
   }
   logOut() {
@@ -63,8 +84,9 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  getUser(userId){
-   this.itemService.user_id_for_individual_user_history = userId;
-   this.router.navigate(['user-item-histroy']);
+  getUser(userId) {
+    this.itemService.user_id_for_individual_user_history = userId;
+    this.router.navigate(['user-item-histroy']);
+    console.log("userId :", userId);
   }
 }

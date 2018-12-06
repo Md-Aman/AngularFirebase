@@ -17,3 +17,8 @@ tr:nth-child(even) {
 .user-name{
     cursor: pointer;
 }
+.view-history{
+    cursor: pointer;
+    border: 1px solid teal;
+
+}
