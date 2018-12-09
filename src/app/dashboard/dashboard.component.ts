@@ -78,6 +78,9 @@ export class DashboardComponent implements OnInit {
   myHistory() {
     this.router.navigate(['items']);
   }
+  inventory(){
+    this.router.navigate(['inventory']);
+  }
   logOut() {
     firebase.auth().signOut();
     localStorage.clear();

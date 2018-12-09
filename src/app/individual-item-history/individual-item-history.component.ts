@@ -33,6 +33,9 @@ export class IndividualItemHistoryComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(localStorage.getItem('userId') == null){
+      this.router.navigate(['']);
+    }
     if(this.itemService.user_id_for_individual_user_history == undefined){
         this.router.navigate(['dashboard']);
     }else{
@@ -61,5 +64,8 @@ dashboard(){
 }
 myHistory(){
   this.router.navigate(['items']);
+}
+inventory(){
+  this.router.navigate(['inventory']);
 }
 }

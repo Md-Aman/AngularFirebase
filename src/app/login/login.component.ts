@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userId', user);
       localStorage.setItem('userEmail', user_email);
       if (user != null) {
-        this.router.navigate(['items']);
+        this.router.navigate(['dashboard']);
       }
     }
 
@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('userId') != null){
-      console.log("szf", localStorage.getItem('userId'));
-      this.router.navigate(['items']);
+      this.router.navigate(['dashboard']);
     }
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

@@ -160,9 +160,12 @@ export class ItemsComponent implements OnInit {
   myHistory() {
     this.router.navigate(['items']);
   }
-  deleteDoc(id) {
-    this.afs.collection('users').doc(id).delete();
+  inventory(){
+    this.router.navigate(['inventory']);
   }
+  // deleteDoc(id) {
+  //   this.afs.collection('users').doc(id).delete();
+  // }
 
   updateId: string;
   update(id) {
