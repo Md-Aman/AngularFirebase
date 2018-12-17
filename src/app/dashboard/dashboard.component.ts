@@ -39,8 +39,9 @@ export class DashboardComponent implements OnInit {
   item_info: any;
   user_individual_details = [];
   total: number = 0;
-  id :string;
+  id: string;
   name: string;
+
   ngOnInit() {
     if (localStorage.getItem('userId') == null) {
       this.router.navigate(['']);
@@ -58,27 +59,32 @@ export class DashboardComponent implements OnInit {
       for (let item of items) {
         this.total_price += item.price;
       }
-      // for (let i = 0; i < this.user_info.length; i++) {
-      //   for (let j = 0; j < this.item_info.length; j++) {
-      //     if (this.user_info[i].user_id==this.item_info[j].user_id) {
 
-      //       this.total += this.item_info[j].price;
-      //       this.id = this.user_info[i].user_id;
-      //       this.name = this.user_info[i].name
-            
-      //     }
-      //   }
-      //   this.user_individual_details.push({ 'user_id': this.id, 'user_name': this.name, 'user_total': this.total })
-      // }
+      for (let i = 0; i < this.user_info.length; i++) {
+        this.id = this.user_info[i].user_id;
+        this.name = this.user_info[i].name;
+        for (let j = 0; j < this.item_info.length; j++) {
+          if (this.user_info[i].user_id == this.item_info[j].user_id) {
+            this.total += this.item_info[j].price;
+          }
+        }
+        this.user_individual_details.push({ 'user_id': this.id, 'user_name': this.name, 'user_total': this.total });
+        this.total = 0;
+      }
+
     });
+
+    console.log("pore kno dekha jabe :", this.user_individual_details);
   }
+
+
   dashboard() {
     this.router.navigate(['dashboard']);
   }
   myHistory() {
     this.router.navigate(['items']);
   }
-  inventory(){
+  inventory() {
     this.router.navigate(['inventory']);
   }
   logOut() {

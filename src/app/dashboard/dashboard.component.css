@@ -19,6 +19,11 @@ tr:nth-child(even) {
 }
 .view-history{
     cursor: pointer;
-    border: 1px solid teal;
-
+}
+.total{
+    background-color: lightgray;
+}
+.bg-color{
+    background-color: grey;
+    color: #dddddd;
 }
