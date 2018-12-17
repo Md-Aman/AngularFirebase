@@ -14,10 +14,10 @@
         <th class="text-center">Expenses</th>
       </tr>
       <tr *ngFor="let user of user_individual_details;">
-        <th class="view-history" (click)="getUser(user.user_id)">{{user.user_name}}</th>
+        <th class="view-history" (click)="getUser(user.user_id)"><b>{{user.user_name}}</b></th>
         <th class="text-right">{{(user.user_total - (total_price/7)) | number : '1.2-2' }}</th>
 
-        <th class="text-right view-history" (click)="getUser(user.user_id)">{{user.user_total | number : '1.2-2'}}</th>
+        <th class="text-right" >{{user.user_total | number : '1.2-2'}}</th>
       </tr>
       <tr>
         <th  colspan="2" class="text-center bg-color">Total Expenditure of December</th>

@@ -27,3 +27,7 @@ tr:nth-child(even) {
     background-color: grey;
     color: #dddddd;
 }
+
+b.hover{
+    background-color: red;
+}
