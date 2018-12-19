@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem('userId') == null) {
       this.router.navigate(['']);
     }
-    this.users = this.afs.collection('users');
+    this.users = this.afs.collection('users', ref => ref.orderBy('name'));
     this.user_data = this.users.valueChanges();
     this.user_data.subscribe(userInfo => {
       this.user_info = userInfo;

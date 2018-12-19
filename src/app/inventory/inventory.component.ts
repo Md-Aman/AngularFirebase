@@ -34,7 +34,7 @@ export class InventoryComponent implements OnInit {
     if(localStorage.getItem('userId') == null){
       this.router.navigate(['']);
     }
-    this.postsCol = this.afs.collection('inventory', ref => ref.where('is_checked', '==', true));
+    this.postsCol = this.afs.collection('inventory', ref => ref.orderBy('item_name', 'asc').where('is_checked', '==', true));
     this.items_available = this.postsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -44,7 +44,7 @@ export class InventoryComponent implements OnInit {
         });
       });
 
-    this.postsCol = this.afs.collection('inventory', ref => ref.where('is_checked', '==', false));
+    this.postsCol = this.afs.collection('inventory', ref => ref.orderBy('item_name', 'asc').where('is_checked', '==', false));
     this.items_unavailable = this.postsCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {

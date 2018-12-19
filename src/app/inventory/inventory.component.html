@@ -18,15 +18,17 @@
     </div>
   </form>
 
-  <h5 class="">Items Finished</h5>
-  <ul class="list-inline">
-    <li class="list-inline-item user-name btn btn-outline-warning list-css" (click)="getUnavailableItemId(item.id,item.data.item_name)"
-      *ngFor="let item of items_unavailable | async;">{{ item.data.item_name }}</li>
-  </ul>
+
   <h5 class="">Items Available</h5>
   <ul class="list-inline">
     <li class="list-inline-item user-name btn btn-outline-success list-css" (click)="getAvailableItemId(item.id, item.data.item_name)"
       *ngFor="let item of items_available | async;">{{ item.data.item_name }}</li>
+  </ul>
+  
+  <h5 class="">Items Finished</h5>
+  <ul class="list-inline">
+    <li class="list-inline-item user-name btn btn-outline-warning list-css" (click)="getUnavailableItemId(item.id,item.data.item_name)"
+      *ngFor="let item of items_unavailable | async;">{{ item.data.item_name }}</li>
   </ul>
 </div>
 
