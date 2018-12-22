@@ -44,7 +44,7 @@ export class IndividualItemHistoryComponent implements OnInit {
          this.userData = users;
       })
 
-    this.postsCol = this.afs.collection('items', ref => ref.where('user_id', '==', this.itemService.user_id_for_individual_user_history));
+    this.postsCol = this.afs.collection('items', ref => ref.where('user_id', '==', this.itemService.user_id_for_individual_user_history).orderBy('date_time','desc'));
     this.items = this.postsCol.valueChanges();
     this.items.subscribe(items => {
       for (let item of items) {
