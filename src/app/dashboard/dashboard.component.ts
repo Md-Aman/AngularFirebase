@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Router } from '@angular/router';
 import { ItemService } from './../services/item-service/item.service';
 import * as firebase from 'firebase';
-import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 interface User {
   user_id: string;
@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit {
       noDownload: false,
       headers: ["Date & Time", "Name", "Item Description", "Price"]
     };
-    new Angular5Csv(this.csvData, 'December 2018', options);
+    new ngxCsv(this.csvData, 'December 2018', options);
   }
 
 
