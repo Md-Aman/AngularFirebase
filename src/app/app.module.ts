@@ -24,7 +24,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ItemService } from './services/item-service/item.service';
 import { IndividualItemHistoryComponent } from './individual-item-history/individual-item-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { InventoryComponent } from './inventory/inventory.component'
+import { InventoryComponent } from './inventory/inventory.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { PmmComponent } from './pmm/pmm.component';
 
 
 const routers: Routes = [
@@ -38,10 +40,16 @@ const routers: Routes = [
     path:"dashboard", component:DashboardComponent
   },
   {
+    path:"pmm", component:PmmComponent
+  },
+  {
     path:"user-item-histroy", component:IndividualItemHistoryComponent
   },
   {
     path:"inventory", component:InventoryComponent
+  },
+  {
+    path:"user-management", component:UserManagementComponent
   }
 ]
 firebase.initializeApp(environment.firebase)
@@ -54,7 +62,9 @@ firebase.initializeApp(environment.firebase)
     DashboardComponent,
     IndividualItemHistoryComponent,
     ChangePasswordComponent,
-    InventoryComponent
+    InventoryComponent,
+    UserManagementComponent,
+    PmmComponent
   ],
   entryComponents: [
     ChangePasswordComponent
@@ -68,7 +78,7 @@ firebase.initializeApp(environment.firebase)
     RouterModule.forRoot(routers),
     MatExpansionModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
 
 
   ],

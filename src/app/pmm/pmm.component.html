@@ -1,0 +1,16 @@
+<div class="container">
+  <h2 class="text-center">
+      <strong>PMM</strong>
+      <br>
+      <!-- <small *ngFor="let user of userData;" >{{user.name}}</small> -->
+  </h2>
+</div>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button> &nbsp;
+    <button *ngIf="isUserManage" type="button" class="btn btn-outline-info" (click)="userManage()"> User Management </button>
+  </div>
+</div>

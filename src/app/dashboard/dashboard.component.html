@@ -27,7 +27,7 @@
         <th class="view-history" (click)="getUser(user.user_id)">
           <b>{{user.user_name}}</b>
         </th>
-        <th class="text-right">{{(user.user_total - (total_price/7)) | number : '1.2-2' }}</th>
+        <th class="text-right">{{(user.user_total - (total_price/ user_info.length)) | number : '1.2-2' }}</th>
 
         <th class="text-right">{{user.user_total | number : '1.2-2'}}</th>
       </tr>
@@ -37,7 +37,7 @@
       </tr>
       <tr>
         <th colspan="2" class="text-center">Average Expenditure of December</th>
-        <th class="text-right">{{total_price/7 | number : '1.2-2'}}</th>
+        <th class="text-right">{{total_price/user_info.length | number : '1.2-2'}}</th>
       </tr>
 
     </table>
@@ -56,7 +56,9 @@
     <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
     <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
     <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button> &nbsp;
-    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button>
+    <button type="button" class="btn btn-outline-info" (click)="pmm()"> PMM </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button> &nbsp;
+    <button *ngIf="isUserManage" type="button" class="btn btn-outline-info" (click)="userManage()"> User Management </button>
   </div>
 </div>
 

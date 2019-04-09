@@ -1,0 +1,37 @@
+<div class="container">
+  <h2 class="text-center">
+    <strong>User Management</strong>
+  </h2>
+  <div class="panel panel-default">
+    <table>
+      <tr>
+        <th class="text-center">Gentlemen</th>
+        <th class="text-center">Status</th>
+      </tr>
+      <tr *ngFor="let user of user_info;">
+        <th class="view-history">
+          <b>{{user.name}}</b>
+        </th>
+        <th>
+          <span *ngIf="user.status === true" class="active" (click)="changeStatus(user.name,user.user_id,false)"> Active </span>
+          <span *ngIf="user.status === false" class="deactive" (click)="changeStatus(user.name,user.user_id,true)"> In-active </span>
+        </th>
+      </tr>
+
+    </table>
+
+    <br>
+    <br>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12 text-center">
+    <button type="button" class="btn btn-outline-warning" (click)="logOut()"> Log Out </button>&nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="dashboard()"> My Dashboard </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="myHistory()"> My History </button> &nbsp;
+    <button type="button" class="btn btn-outline-info" (click)="inventory()"> Inventory </button>
+  </div>
+</div>
