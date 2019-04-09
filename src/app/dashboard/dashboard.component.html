@@ -27,17 +27,17 @@
         <th class="view-history" (click)="getUser(user.user_id)">
           <b>{{user.user_name}}</b>
         </th>
-        <th class="text-right">{{(user.user_total - (total_price/7)) | number : '1.2-2' }}</th>
+        <th class="text-right">{{(user.user_total - (total_price/5)) | number : '1.2-2' }}</th>
 
         <th class="text-right">{{user.user_total | number : '1.2-2'}}</th>
       </tr>
       <tr>
-        <th colspan="2" class="text-center bg-color">Total Expenditure of December</th>
+        <th colspan="2" class="text-center bg-color">Total Expenditure of {{currentMonth}}</th>
         <th class="text-right total bg-color">{{total_price | number : '1.2-2'}}</th>
       </tr>
       <tr>
-        <th colspan="2" class="text-center">Average Expenditure of December</th>
-        <th class="text-right">{{total_price/7 | number : '1.2-2'}}</th>
+        <th colspan="2" class="text-center">Average Expenditure of {{currentMonth}}</th>
+        <th class="text-right">{{total_price/5 | number : '1.2-2'}}</th>
       </tr>
 
     </table>
