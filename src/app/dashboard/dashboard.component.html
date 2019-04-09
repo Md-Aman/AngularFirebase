@@ -32,11 +32,11 @@
         <th class="text-right">{{user.user_total | number : '1.2-2'}}</th>
       </tr>
       <tr>
-        <th colspan="2" class="text-center bg-color">Total Expenditure of December</th>
+        <th colspan="2" class="text-center bg-color">Total Expenditure of {{currentMonth}}</th>
         <th class="text-right total bg-color">{{total_price | number : '1.2-2'}}</th>
       </tr>
       <tr>
-        <th colspan="2" class="text-center">Average Expenditure of December</th>
+        <th colspan="2" class="text-center">Average Expenditure of {{currentMonth}}</th>
         <th class="text-right">{{total_price/user_info.length | number : '1.2-2'}}</th>
       </tr>
 

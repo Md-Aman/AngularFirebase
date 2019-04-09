@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 import { ItemService } from './../services/item-service/item.service';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 import * as firebase from 'firebase';
 interface User {
   user_id: string;
@@ -42,6 +43,11 @@ export class DashboardComponent implements OnInit {
   id: string;
   name: string;
   isUserManage:boolean = false;
+  currentMonth: string;
+
+  monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
 
   ngOnInit() {
     if (localStorage.getItem('userId') == null) {
@@ -59,6 +65,8 @@ export class DashboardComponent implements OnInit {
       this.user_info = userInfo;
     });
 
+    this.currentMonth = this.monthNames[new Date().getMonth()];
+
     this.postsCol = this.afs.collection('items', ref => ref.orderBy('date_time'));
     this.items = this.postsCol.valueChanges();
     this.items.subscribe(items => {
@@ -66,7 +74,8 @@ export class DashboardComponent implements OnInit {
       for (let item of items) {
         this.total_price += item.price;
       }
-
+      console.log("data :", this.item_info, this.user_info);
+      // this.user_info = this.user_info.filter(item => item.name !== 'Lutfor' && item.name !== 'Shaikot');
       for (let i = 0; i < this.user_info.length; i++) {
         this.id = this.user_info[i].user_id;
         this.name = this.user_info[i].name;
@@ -111,4 +120,39 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['user-item-histroy']);
     console.log("userId :", userId);
   }
+  csvData = [];
+  date_time: string;
+  item_description: string;
+  item_price: string;
+
+  downloadCSVfile() {
+    for (let i = 0; i < this.item_info.length; i++) {
+      for (let j = 0; j < this.user_info.length; j++) {
+        if (this.item_info[i].user_id == this.user_info[j].user_id) {
+          this.name = this.user_info[j].name;
+          this.date_time = this.item_info[i].date_time;
+          this.item_description = this.item_info[i].item_description;
+          this.item_price = this.item_info[i].price;
+        }
+      }
+      this.csvData.push({ 'dateTime': this.date_time, 'name': this.name, 'itemDescription': this.item_description, 'itemPrice': this.item_price });
+    }
+
+    var options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      useBom: true,
+      noDownload: false,
+      headers: ["Date & Time", "Name", "Item Description", "Price"]
+    };
+    const month = this.currentMonth + '2018';
+    new ngxCsv(this.csvData, month , options);
+  }
+
+
+
+
 }
